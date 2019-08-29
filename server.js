@@ -12,6 +12,8 @@ const PORT = 8000;
 app.use(cors());
 app.use(bodyParser.json());
 
+app.use('/', express.static(path.join(__dirname, 'assets')));
+
 mongoose.connect('mongodb://127.0.0.1:27017/exampledb', {useNewUrlParser: true});
 mongoose.set('useCreateIndex', true);
 const connection = mongoose.connection;
@@ -43,6 +45,10 @@ personRoutes.post('/add', (req, res) => {
 });
 
 app.use('/api/person', personRoutes);
+
+app.use('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'assets', 'index.html'));
+});
 
 app.listen(PORT, () => {
   console.log('Server is listening on port: ' + PORT);
