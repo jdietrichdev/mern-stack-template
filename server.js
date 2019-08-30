@@ -22,6 +22,7 @@ connection.once('open', () => {
   console.log('MongoDB database connection established successfully');
 });
 
+//Basic object and API to access
 personRoutes.get('/get', (req, res) => {
   Person.find((err, persons) => {
     if(err) {
@@ -31,6 +32,16 @@ personRoutes.get('/get', (req, res) => {
     }
   });
 });
+
+personRoutes.get('/get/:id', (req, res) => {
+  Person.findById(req.params.id, (err, person) => {
+    if(err) {
+      console.log(err);
+    } else {
+      res.json(person);
+    }
+  })
+})
 
 personRoutes.post('/add', (req, res) => {
   let newPerson = new Person(req.body);
@@ -43,6 +54,24 @@ personRoutes.post('/add', (req, res) => {
       res.status(400).send('Failed to add user');
     });
 });
+
+personRoutes.post('/update/:id', (req, res) {
+  Person.findById(req.params.id, (err, person) => {
+    if(!person || err) {
+      res.status(400).send('ID not found');
+    } else {
+      person.name = req.body.name;
+      person.age = req.body.age;
+
+      person.save().then(person => {
+        res.json({'requestId': person.id});
+      })
+      .catch(err => {
+        res.status(400).send('Error updating request');
+      })
+    }
+  })
+})
 
 app.use('/api/person', personRoutes);
 
