@@ -2,7 +2,9 @@ import React from 'react';
 
 const Home = props => {
   return (
-    <h1>Hello World!</h1>
+    <div data-testid="home">
+      <h1>Hello World!</h1>
+    </div>
   );
 }
 
