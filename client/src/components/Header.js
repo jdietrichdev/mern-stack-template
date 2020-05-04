@@ -13,7 +13,7 @@ const Header = props => {
 
   return (
     <nav data-testid='header' className='navbar navbar-expand-lg navbar-light bg-light'>
-      <Link className='navbar-brand' to='/'>Josh Dietrich</Link>
+      <Link className='navbar-brand' to='/'>Website Title</Link>
 
       <ul className='navbar-nav ml-auto'>
         {!props.user &&
