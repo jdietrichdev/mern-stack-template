@@ -7,13 +7,11 @@ const secret = 'supersecretsecret';
 let User = require('../../models/user.model');
 
 router.post('/createUser', (req, res) => {
-  console.log('Creating user...');
   User.findOne({ 'username': req.body.username }, (err, foundUser) => {
     if (err) {
       console.log(err);
     } else {
       if (foundUser === null) {
-        console.log('New User');
         let newUser = new User(req.body);
         newUser.save()
           .then(newUser => {
@@ -22,7 +20,6 @@ router.post('/createUser', (req, res) => {
             const token = jwt.sign(payload, secret, {
               expiresIn: '30m'
             });
-            console.log('Creating cookie');
             res.cookie('user_token', token, { path: '/' }).status(200).json(user);
           })
           .catch(err => {
@@ -59,7 +56,6 @@ router.post('/authenticate', (req, res) => {
 });
 
 router.get('/logout', (req, res) => {
-  console.log('Clearing cookie');
   res.clearCookie('user_token', { path: '/' });
 });
 

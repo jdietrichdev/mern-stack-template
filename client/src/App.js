@@ -5,7 +5,7 @@ import { ROUTES } from './utility/constants';
 import Header from './components/Header';
 import Home from './components/Home';
 import Login from './components/Login';
-import { isElementOfType } from 'react-dom/test-utils';
+import Register from './components/Register';
 
 const App = () => {
   const [user, setUser] = useState();
@@ -30,7 +30,10 @@ const App = () => {
           return <Home user={user} {...routeProps} />
         }} />
         <Route path={ROUTES.LOGIN} render={routeProps => {
-          return <Login user={user} setUser={setUser} {...routeProps} />
+          return <Login setUser={setUser} {...routeProps} />
+        }} />
+        <Route path={ROUTES.REGISTER} render={routeProps => {
+          return <Register setUser={setUser} {...routeProps} />
         }} />
       </Switch>
     </Router>

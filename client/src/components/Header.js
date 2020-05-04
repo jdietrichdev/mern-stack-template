@@ -18,6 +18,7 @@ const Header = props => {
       <ul className='navbar-nav ml-auto'>
         {!props.user &&
           <li className='nav-item'>
+            <Link to='/register'>Register</Link>
             <Link to='/login'>Login</Link>
           </li>
         }
@@ -27,7 +28,6 @@ const Header = props => {
               {props.user.username}
             </a>
             <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-              <Link className="dropdown-item" to={`/user/${props.user._id}`}>Profile</Link>
               <button className="dropdown-item" onClick={logout}>Logout</button>
             </div>
           </li>
