@@ -4,7 +4,6 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
-const person = require('./server/src/routes/person');
 const auth = require('./server/src/routes/auth');
 
 const app = express();
@@ -25,7 +24,6 @@ connection.once('open', () => {
 
 app.use('/', express.static(path.join(__dirname, 'assets')));
 router.use('/auth', auth);
-router.use('/person', person);
 
 app.use('/api', router);
 
